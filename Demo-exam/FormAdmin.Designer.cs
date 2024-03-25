@@ -33,7 +33,6 @@
             this.сотрудникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.заказыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сменыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.назначитьСменуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -41,8 +40,12 @@
             this.buttonAddEmpl = new System.Windows.Forms.Button();
             this.buttonStatusEmpl = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -83,19 +86,10 @@
             // 
             // сменыToolStripMenuItem
             // 
-            this.сменыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.назначитьСменуToolStripMenuItem});
             this.сменыToolStripMenuItem.Name = "сменыToolStripMenuItem";
             this.сменыToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
             this.сменыToolStripMenuItem.Text = "Смены";
             this.сменыToolStripMenuItem.Click += new System.EventHandler(this.сменыToolStripMenuItem_Click);
-            // 
-            // назначитьСменуToolStripMenuItem
-            // 
-            this.назначитьСменуToolStripMenuItem.Name = "назначитьСменуToolStripMenuItem";
-            this.назначитьСменуToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
-            this.назначитьСменуToolStripMenuItem.Text = "Назначить смену";
-            this.назначитьСменуToolStripMenuItem.Click += new System.EventHandler(this.назначитьСменуToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
@@ -111,21 +105,21 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(803, 224);
+            this.dateTimePicker1.Location = new System.Drawing.Point(803, 192);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker1.TabIndex = 3;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(903, 186);
+            this.textBox1.Location = new System.Drawing.Point(903, 154);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 4;
             // 
             // buttonAddWork
             // 
-            this.buttonAddWork.Location = new System.Drawing.Point(803, 252);
+            this.buttonAddWork.Location = new System.Drawing.Point(803, 220);
             this.buttonAddWork.Name = "buttonAddWork";
             this.buttonAddWork.Size = new System.Drawing.Size(200, 23);
             this.buttonAddWork.TabIndex = 5;
@@ -156,17 +150,43 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(800, 186);
+            this.label1.Location = new System.Drawing.Point(800, 154);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "id сотрудника";
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(12, 55);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(766, 352);
+            this.dataGridView2.TabIndex = 9;
+            this.dataGridView2.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseClick);
+            this.dataGridView2.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDown);
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(12, 55);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.RowHeadersWidth = 51;
+            this.dataGridView3.RowTemplate.Height = 24;
+            this.dataGridView3.Size = new System.Drawing.Size(766, 352);
+            this.dataGridView3.TabIndex = 10;
+            this.dataGridView3.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView3_CellMouseClick);
+            this.dataGridView3.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView3_CellMouseDown);
             // 
             // FormAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1027, 425);
+            this.Controls.Add(this.dataGridView3);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonStatusEmpl);
             this.Controls.Add(this.buttonAddEmpl);
@@ -183,6 +203,8 @@
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,12 +218,13 @@
         private System.Windows.Forms.ToolStripMenuItem заказыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сменыToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ToolStripMenuItem назначитьСменуToolStripMenuItem;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttonAddWork;
         private System.Windows.Forms.Button buttonAddEmpl;
         private System.Windows.Forms.Button buttonStatusEmpl;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridView3;
     }
 }

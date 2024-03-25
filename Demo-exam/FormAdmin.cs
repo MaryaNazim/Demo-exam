@@ -25,7 +25,14 @@ namespace Demo_exam
         //и ограничивающие данные, а также связи между таблицами.
         private DataSet ds = new DataSet();
         //Представляет одну таблицу данных в памяти.
-        private DataTable table = new DataTable();
+        private DataTable table1 = new DataTable();
+
+        //Представляет одну таблицу данных в памяти.
+        private DataTable table2 = new DataTable();
+
+        //Представляет одну таблицу данных в памяти.
+        private DataTable table3 = new DataTable();
+
         //Переменная для ID записи в БД, выбранной в гриде. Пока она не содердит значения, лучше его инициализировать с 0
         //что бы в БД не отправлялся null
         string id_selected_rows = "0";
@@ -39,6 +46,15 @@ namespace Demo_exam
             buttonStatusEmpl.Visible = true;
             buttonAddEmpl.Visible = true;
             dataGridView1.Visible = true;
+            dataGridView2.Visible = false;
+            dataGridView3.Visible = false;
+            label1.Visible = false;
+            textBox1.Visible = false;
+            dateTimePicker1.Visible = false;
+            buttonAddWork.Visible = false;
+
+            //Чистим виртуальную таблицу
+            table1.Clear();
             //Вызываем метод для заполнение дата Грида
             GetListEmployees();
             //Видимость полей в гриде
@@ -72,6 +88,8 @@ namespace Demo_exam
             textBox1.Visible = false;
             dateTimePicker1.Visible = false;
             dataGridView1.Visible = false;
+            dataGridView2.Visible = false;
+            dataGridView3.Visible = false;
             buttonAddWork.Visible = false;
             buttonAddEmpl.Visible = false;
             buttonStatusEmpl.Visible = false;
@@ -86,7 +104,7 @@ namespace Demo_exam
         {
             dataGridView1.CurrentCell = dataGridView1[e.ColumnIndex, e.RowIndex];
             dataGridView1.CurrentRow.Selected = true;
-            GetSelectedIDString();
+            GetSelectedIDString1();
         }
 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -94,9 +112,9 @@ namespace Demo_exam
             if (!e.RowIndex.Equals(-1) && !e.ColumnIndex.Equals(-1) && e.Button.Equals(MouseButtons.Right))
             {
                 dataGridView1.CurrentCell = dataGridView1[e.ColumnIndex, e.RowIndex];
-                //dataGridView1.CurrentRow.Selected = true;
+                dataGridView1.CurrentRow.Selected = true;
                 dataGridView1.CurrentCell.Selected = true;
-                GetSelectedIDString();
+                GetSelectedIDString1();
             }
         }
 
@@ -104,7 +122,7 @@ namespace Demo_exam
         public void reloadEmpl_list()
         {
             //Чистим виртуальную таблицу
-            table.Clear();
+            table1.Clear();
             //Вызываем метод получения записей, который вновь заполнит таблицу
             GetListEmployees();
         }
@@ -119,9 +137,9 @@ namespace Demo_exam
             //Объявляем команду, которая выполнить запрос в соединении conn
             MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
             //Заполняем таблицу записями из БД
-            MyDA.Fill(table);
+            MyDA.Fill(table1);
             //Указываем, что источником данных в bindingsource является заполненная выше таблица
-            bSource.DataSource = table;
+            bSource.DataSource = table1;
             //Указываем, что источником данных ДатаГрида является bindingsource 
             dataGridView1.DataSource = bSource;
             //Закрываем соединение
@@ -129,7 +147,7 @@ namespace Demo_exam
         }
 
         //Метод получения ID выделенной строки, для последующего вызова его в нужных методах
-        public void GetSelectedIDString()
+        public void GetSelectedIDString1()
         {
             //Переменная для индекс выбранной строки в гриде
             string index_selected_rows;
@@ -139,32 +157,62 @@ namespace Demo_exam
             id_selected_rows = dataGridView1.Rows[Convert.ToInt32(index_selected_rows)].Cells[0].Value.ToString();
         }
 
+        public void GetSelectedIDString2()
+        {
+            //Переменная для индекс выбранной строки в гриде
+            string index_selected_rows;
+            //Индекс выбранной строки
+            index_selected_rows = dataGridView2.SelectedCells[0].RowIndex.ToString();
+            //ID конкретной записи в Базе данных, на основании индекса строки
+            id_selected_rows = dataGridView2.Rows[Convert.ToInt32(index_selected_rows)].Cells[0].Value.ToString();
+        }
+
+        public void GetSelectedIDString3()
+        {
+            //Переменная для индекс выбранной строки в гриде
+            string index_selected_rows;
+            //Индекс выбранной строки
+            index_selected_rows = dataGridView3.SelectedCells[0].RowIndex.ToString();
+            //ID конкретной записи в Базе данных, на основании индекса строки
+            id_selected_rows = dataGridView3.Rows[Convert.ToInt32(index_selected_rows)].Cells[0].Value.ToString();
+        }
+
         private void сменыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridView1.Visible = true;
+            dataGridView1.Visible = false;
+            dataGridView2.Visible = false;
+            dataGridView3.Visible = true;
             label1.Visible = true;
+            textBox1.Visible = true;
+            dateTimePicker1.Visible = true;
+            buttonAddWork.Visible = true;
+            buttonStatusEmpl.Visible = false;
+            buttonAddEmpl.Visible = false;
+
+            //Чистим виртуальную таблицу
+            table3.Clear();
             //Вызываем метод для заполнение дата Грида
             GetListWork();
             //Видимость полей в гриде
-            dataGridView1.Columns[0].Visible = true;
-            dataGridView1.Columns[1].Visible = true;
-            dataGridView1.Columns[2].Visible = true;
+            dataGridView3.Columns[0].Visible = true;
+            dataGridView3.Columns[1].Visible = true;
+            dataGridView3.Columns[2].Visible = true;
             //Ширина полей
-            dataGridView1.Columns[0].FillWeight = 15;
-            dataGridView1.Columns[1].FillWeight = 40;
-            dataGridView1.Columns[2].FillWeight = 15;
+            dataGridView3.Columns[0].FillWeight = 15;
+            dataGridView3.Columns[1].FillWeight = 40;
+            dataGridView3.Columns[2].FillWeight = 15;
             //Режим для полей "Только для чтения"
-            dataGridView1.Columns[0].ReadOnly = true;
-            dataGridView1.Columns[1].ReadOnly = true;
-            dataGridView1.Columns[2].ReadOnly = true;
+            dataGridView3.Columns[0].ReadOnly = true;
+            dataGridView3.Columns[1].ReadOnly = true;
+            dataGridView3.Columns[2].ReadOnly = true;
             //Растягивание полей грида
-            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView3.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView3.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView3.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //Убираем заголовки строк
-            dataGridView1.RowHeadersVisible = false;
+            dataGridView3.RowHeadersVisible = false;
             //Показываем заголовки столбцов
-            dataGridView1.ColumnHeadersVisible = true;
+            dataGridView3.ColumnHeadersVisible = true;
         }
 
         //Метод наполнения виртуальной таблицы и присвоение её к датагриду
@@ -177,20 +225,13 @@ namespace Demo_exam
             //Объявляем команду, которая выполнить запрос в соединении conn
             MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
             //Заполняем таблицу записями из БД
-            MyDA.Fill(table);
+            MyDA.Fill(table3);
             //Указываем, что источником данных в bindingsource является заполненная выше таблица
-            bSource.DataSource = table;
+            bSource.DataSource = table3;
             //Указываем, что источником данных ДатаГрида является bindingsource 
-            dataGridView1.DataSource = bSource;
+            dataGridView3.DataSource = bSource;
             //Закрываем соединение
             conn.Close();
-        }
-
-        private void назначитьСменуToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            textBox1.Visible = true;
-            dateTimePicker1.Visible = true;
-            buttonAddWork.Visible = true;
         }
 
         private void buttonAddWork_Click(object sender, EventArgs e)
@@ -214,48 +255,68 @@ namespace Demo_exam
         public void reloadWork_list()
         {
             //Чистим виртуальную таблицу
-            table.Clear();
+            table3.Clear();
             //Вызываем метод получения записей, который вновь заполнит таблицу
             GetListWork();
         }
 
+        //Метод обновления DataGreed
+        public void reloadOrder_list()
+        {
+            //Чистим виртуальную таблицу
+            table2.Clear();
+            //Вызываем метод получения записей, который вновь заполнит таблицу
+            GetListOrders();
+        }
+
         private void заказыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridView1.Visible = true;
+            dataGridView1.Visible = false;
+            dataGridView2.Visible = true;
+            dataGridView3.Visible = false;
+            label1.Visible = false;
+            textBox1.Visible = false;
+            dateTimePicker1.Visible = false;
+            buttonAddWork.Visible = false;
+            buttonStatusEmpl.Visible = false;
+            buttonAddEmpl.Visible = false;
+
+            //Чистим виртуальную таблицу
+            table2.Clear();
             //Вызываем метод для заполнение дата Грида
             GetListOrders();
             //Видимость полей в гриде
-            dataGridView1.Columns[0].Visible = true;
-            dataGridView1.Columns[1].Visible = true;
-            dataGridView1.Columns[2].Visible = true;
-            dataGridView1.Columns[3].Visible = true;
-            dataGridView1.Columns[4].Visible = true;
-            dataGridView1.Columns[5].Visible = true;
+            dataGridView2.Columns[0].Visible = true;
+            dataGridView2.Columns[1].Visible = true;
+            dataGridView2.Columns[2].Visible = true;
+            dataGridView2.Columns[3].Visible = true;
+            dataGridView2.Columns[4].Visible = true;
+            dataGridView2.Columns[5].Visible = true;
             //Ширина полей
-            dataGridView1.Columns[0].FillWeight = 15;
-            dataGridView1.Columns[1].FillWeight = 15;
-            dataGridView1.Columns[2].FillWeight = 15;
-            dataGridView1.Columns[3].FillWeight = 40;
-            dataGridView1.Columns[4].FillWeight = 15;
-            dataGridView1.Columns[5].FillWeight = 15;
+            dataGridView2.Columns[0].FillWeight = 15;
+            dataGridView2.Columns[1].FillWeight = 15;
+            dataGridView2.Columns[2].FillWeight = 15;
+            dataGridView2.Columns[3].FillWeight = 40;
+            dataGridView2.Columns[4].FillWeight = 15;
+            dataGridView2.Columns[5].FillWeight = 15;
             //Режим для полей "Только для чтения"
-            dataGridView1.Columns[0].ReadOnly = true;
-            dataGridView1.Columns[1].ReadOnly = true;
-            dataGridView1.Columns[2].ReadOnly = true;
-            dataGridView1.Columns[3].ReadOnly = true;
-            dataGridView1.Columns[4].ReadOnly = true;
-            dataGridView1.Columns[5].ReadOnly = true;
+            dataGridView2.Columns[0].ReadOnly = true;
+            dataGridView2.Columns[1].ReadOnly = true;
+            dataGridView2.Columns[2].ReadOnly = true;
+            dataGridView2.Columns[3].ReadOnly = true;
+            dataGridView2.Columns[4].ReadOnly = true;
+            dataGridView2.Columns[5].ReadOnly = true;
             //Растягивание полей грида
-            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView2.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView2.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView2.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView2.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView2.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView2.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //Убираем заголовки строк
-            dataGridView1.RowHeadersVisible = false;
+            dataGridView2.RowHeadersVisible = false;
             //Показываем заголовки столбцов
-            dataGridView1.ColumnHeadersVisible = true;
+            dataGridView2.ColumnHeadersVisible = true;
         }
 
         //Метод наполнения виртуальной таблицы и присвоение её к датагриду
@@ -268,11 +329,11 @@ namespace Demo_exam
             //Объявляем команду, которая выполнить запрос в соединении conn
             MyDA.SelectCommand = new MySqlCommand(commandStr, conn);
             //Заполняем таблицу записями из БД
-            MyDA.Fill(table);
+            MyDA.Fill(table2);
             //Указываем, что источником данных в bindingsource является заполненная выше таблица
-            bSource.DataSource = table;
+            bSource.DataSource = table2;
             //Указываем, что источником данных ДатаГрида является bindingsource 
-            dataGridView1.DataSource = bSource;
+            dataGridView2.DataSource = bSource;
             //Закрываем соединение
             conn.Close();
         }
@@ -307,6 +368,42 @@ namespace Demo_exam
             {
                 conn.Close();
                 reloadEmpl_list();
+            }
+        }
+
+        private void dataGridView2_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            dataGridView2.CurrentCell = dataGridView2[e.ColumnIndex, e.RowIndex];
+            dataGridView2.CurrentRow.Selected = true;
+            GetSelectedIDString2();
+        }
+
+        private void dataGridView2_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (!e.RowIndex.Equals(-1) && !e.ColumnIndex.Equals(-1) && e.Button.Equals(MouseButtons.Right))
+            {
+                dataGridView2.CurrentCell = dataGridView2[e.ColumnIndex, e.RowIndex];
+                dataGridView2.CurrentRow.Selected = true;
+                dataGridView2.CurrentCell.Selected = true;
+                GetSelectedIDString2();
+            }
+        }
+
+        private void dataGridView3_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            dataGridView3.CurrentCell = dataGridView3[e.ColumnIndex, e.RowIndex];
+            dataGridView3.CurrentRow.Selected = true;
+            GetSelectedIDString3();
+        }
+
+        private void dataGridView3_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (!e.RowIndex.Equals(-1) && !e.ColumnIndex.Equals(-1) && e.Button.Equals(MouseButtons.Right))
+            {
+                dataGridView3.CurrentCell = dataGridView3[e.ColumnIndex, e.RowIndex];
+                dataGridView3.CurrentRow.Selected = true;
+                dataGridView3.CurrentCell.Selected = true;
+                GetSelectedIDString3();
             }
         }
     }
