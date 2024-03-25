@@ -22,7 +22,7 @@ namespace Demo_exam
         string connStr = "server=localhost;port=3306;user=maryanazim;database=demo;password=48985588John;";
         MySqlConnection conn;
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonLogin_Click(object sender, EventArgs e)
         {
             //Запрос в БД на предмет того, если ли строка с подходящим логином и паролем
             string sql = "SELECT * FROM `users` WHERE `login`=@un and `password`=@up";
@@ -101,21 +101,21 @@ namespace Demo_exam
                 //И в зависимости от того, какая роль (цифра) хранится в поле класса и передана в метод, показываются те или иные кнопки.
                 case 1:
                     MessageBox.Show("Добро пожаловать, администратор");
-                    //Инициализируем и вызываем форму диалога авторизации
+                    //Инициализируем и вызываем форму администратора
                     FormAdmin formAdmin = new FormAdmin();
                     //Вызов формы в режиме диалога
                     formAdmin.ShowDialog();
                     break;
                 case 2:
                     MessageBox.Show("Добро пожаловать, повар");
-                    //Инициализируем и вызываем форму диалога авторизации
+                    //Инициализируем и вызываем форму повара
                     FormKitcher formKitcher = new FormKitcher();
                     //Вызов формы в режиме диалога
                     formKitcher.ShowDialog();
                     break;
                 case 3:
                     MessageBox.Show("Добро пожаловать, официант");
-                    //Инициализируем и вызываем форму диалога авторизации
+                    //Инициализируем и вызываем форму официанта
                     FormWaiter formWaiter = new FormWaiter();
                     //Вызов формы в режиме диалога
                     formWaiter.ShowDialog();

@@ -98,6 +98,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEmploy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEmploy.Designer.cs">
+      <DependentUpon>AddEmploy.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,8 +130,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddEmploy.resx">
+      <DependentUpon>AddEmploy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAdmin.resx">
+      <DependentUpon>FormAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAuth.resx">
       <DependentUpon>FormAuth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKitcher.resx">
+      <DependentUpon>FormKitcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWaiter.resx">
+      <DependentUpon>FormWaiter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

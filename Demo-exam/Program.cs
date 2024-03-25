@@ -21,6 +21,17 @@ namespace Demo_exam
         //переменная роль
         public static int auth_role = 0;
     }
+
+    //Класс для передачи значений между формами
+    static class SomeClass
+    {
+        //Статичное поле, которое хранит значение для передачи его между формами
+        public static string variable_class;
+        //Статичное поле, которое хранит значения ID добавленного клиента на AddEmploy
+        public static string new_inserted_id;
+        //Статичное поле, которое хранит значение ID добаленного заказа
+        public static string new_inserted_Employ_id;
+    }
     internal static class Program
     {
         /// <summary>
